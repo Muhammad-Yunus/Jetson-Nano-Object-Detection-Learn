@@ -12,7 +12,7 @@ ____
 ![](resource/ironman.gif)
 - Clone [ObjectDetection-Tensorflow](https://github.com/Muhammad-Yunus/ObjectDetection-Tensorflow) repository from Github to local computer,
 - Open cloned `ObjectDetection-Tensorflow` repo folder.
-- Copy the video that you have recorded to the `dataset/images/` folder.
+- Copy the video that you have recorded to the `dataset/videos/` folder.
 - Convert Video to Image using `dataset_builder.ipynb`,
 - Download & Install [LabelImg](https://github.com/tzutalin/labelImg) 
 - Click `Open Dir` button in labelImg and choose `dataset/images/` folder.
