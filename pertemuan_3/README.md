@@ -10,19 +10,22 @@ ____
 # 1. Prepare Dataset
 - Take a video for the object to be detected. `One video` for `one data class`.<br>
 ![](resource/ironman.gif)
-- Clone [ObjectDetection-Tensorflow](https://github.com/Muhammad-Yunus/ObjectDetection-Tensorflow) repository from Github,
-- Convert Video to Image using `dataset_builder.ipynb` in cloned `ObjectDetection-Tensorflow` repo.
+- Clone [ObjectDetection-Tensorflow](https://github.com/Muhammad-Yunus/ObjectDetection-Tensorflow) repository from Github to local computer,
+- open cloned `ObjectDetection-Tensorflow` repo folder.
+- copy the video that you have recorded to the `dataset/images/` folder.
+- Convert Video to Image using `dataset_builder.ipynb`,
 - Download & Install [LabelImg](https://github.com/tzutalin/labelImg) 
+- click `Open Dir` button in labelImg and choose `dataset/images/` folder.
 - Annotate Dataset using LabelImg, <br>
 ![](resource/annotate_image.gif)
-- Split dataset (20% for test dataset, 80% for training dataset) using `dataset_builder.ipynb` in cloned `ObjectDetection-Tensorflow` repo.
+- Split dataset (20% for test dataset, 80% for training dataset) using `dataset_builder.ipynb`.
 ___
 # 2. Training Tensorflow model Faster R-CNN Inception V2 in Google Colab
-- Open [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb#recent=true)
-- Upload `Faster_R_CNN_Training_using_Custom_Dataset.ipynb` in cloned `ObjectDetection-Tensorflow` repo to Colab.
+- Open [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb#recent=true) in local computer browser.
+- Upload `Faster_R_CNN_Training_using_Custom_Dataset.ipynb` from cloned `ObjectDetection-Tensorflow` repo to Colab.
 ![](resource/colab-upload.png)
-- Follow the step in uploaded notebook 
-- Download `inference_graph.zip` from colab to local computer
+- Follow training step in uploaded notebook, 
+- After training & testing finish, download `inference_graph.zip` from colab to local computer,
 - Detection Result : <br>
     <p float="left">
     <img src="resource/batman.png" width="300" />
