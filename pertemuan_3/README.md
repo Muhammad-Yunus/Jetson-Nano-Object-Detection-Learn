@@ -11,11 +11,11 @@ ____
 - Take a video for the object to be detected. `One video` for `one data class`.<br>
 ![](resource/ironman.gif)
 - Clone [ObjectDetection-Tensorflow](https://github.com/Muhammad-Yunus/ObjectDetection-Tensorflow) repository from Github to local computer,
-- open cloned `ObjectDetection-Tensorflow` repo folder.
-- copy the video that you have recorded to the `dataset/images/` folder.
+- Open cloned `ObjectDetection-Tensorflow` repo folder.
+- Copy the video that you have recorded to the `dataset/images/` folder.
 - Convert Video to Image using `dataset_builder.ipynb`,
 - Download & Install [LabelImg](https://github.com/tzutalin/labelImg) 
-- click `Open Dir` button in labelImg and choose `dataset/images/` folder.
+- Click `Open Dir` button in labelImg and choose `dataset/images/` folder.
 - Annotate Dataset using LabelImg, <br>
 ![](resource/annotate_image.gif)
 - Split dataset (20% for test dataset, 80% for training dataset) using `dataset_builder.ipynb`.
@@ -36,14 +36,14 @@ ___
     ![](resource/eval.png)
 ___
 # 3. Deploy model to Jetson Nano
-- extract `inference_graph.zip` in local computer
-- copy `frozen_inference_graph.pb` and `faster_rcnn_inception_v2_custom_dataset.pbtxt` from extracted `inference_graph.zip` folder to  `pertemuan_3/model/` folder in Jetson Nano.
-- copy `object-detection.json` file created in step one (prepare dataset - [ObjectDetection-Tensorflow](https://github.com/Muhammad-Yunus/ObjectDetection-Tensorflow)) to `pertemuan_3/` folder in Jetson Nano.
-- run `faster_r-cnn_flask_async.py`,
+- Extract `inference_graph.zip` in local computer
+- Copy `frozen_inference_graph.pb` and `faster_rcnn_inception_v2_custom_dataset.pbtxt` from extracted `inference_graph.zip` folder to  `pertemuan_3/model/` folder in Jetson Nano.
+- Copy `object-detection.json` file created in step one (prepare dataset - [ObjectDetection-Tensorflow](https://github.com/Muhammad-Yunus/ObjectDetection-Tensorflow)) to `pertemuan_3/` folder in Jetson Nano.
+- Run `faster_r-cnn_flask_async.py`,
     ```
     python3 faster_r-cnn_flask_async.py
     ```
-- open result in browser (local computer) with url `http://<jetson nano IP>:5000`
+- Open result in browser (local computer) with url `http://<jetson nano IP>:5000`
 - Result,<br>
 ![](resource/live-stream.gif)
 ___
