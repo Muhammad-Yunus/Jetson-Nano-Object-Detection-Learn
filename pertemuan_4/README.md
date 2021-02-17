@@ -29,7 +29,7 @@ ___
     - `Localization` : correct class, 0.1 < IOU < 0.5
     - `Similar` : class is similar, IOU > 0.1
     - `Other` : class is wrong, IOU > 0.1
-    - `Background` : IOU < 0.1 for any object
+    - `Background` : IOU < 0.1 for any object <br>
     ![](resource/error.png)
 - Pros: 
     - Quite `fast` (`~40 FPS` on Nvidia Titan Black)
@@ -37,7 +37,7 @@ ___
     - `Low Error Rate` for Foreground/ Background misclassification
     - Learn very `general representation` of objects
 - Cons: 
-    - `Less accurate` than Fast R-CNN (63.9% mAP compare to 66.9%)
+    - `Less accurate` than Fast R-CNN (63.9% mAP compare to 66.9%) <br>
     ![](resource/map.png)
     - Can not detect `small objects` 
     - `Low detection rate` of objects that located `close` to each other
