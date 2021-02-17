@@ -43,7 +43,7 @@ ___
     - `Low detection rate` of objects that located `close` to each other
 ## 1.2 YOLOv2 (YOLO9000)
 - YOLOv2 or `YOLO9000` was introduced at the end of 2016 by `Joseph Redmon` et al.
-- YOLOv2 uses `Darknet 19 architecture` as a backbone with `19 convolutional layers` and `5 max pooling layers` and `a softmax layer` for classification objects. 
+- YOLOv2 uses `Darknet 19 architecture` as a backbone with `19 convolutional layers` and `5 max pooling layers` and `a softmax layer` for classification objects. <br>
 ![](resource/darknet19.png)
 - Inference Speed on Pascal VOC 2007 :
     - At 67 FPS, gets 76.8 mAP 
