@@ -13,3 +13,8 @@ Resource Belajar Deep Learning Object Detection di Jetson Nano
     - [download materi (zip)](https://github.com/Muhammad-Yunus/Jetson-Nano-Object-Detection-Learn/raw/main/pertemuan_3/pertemuan_3.zip)
     - [download ObjectDetection-Tensorflow repo (zip)](https://github.com/Muhammad-Yunus/ObjectDetection-Tensorflow/archive/main.zip)
     - [download labelImg (zip)](https://github.com/tzutalin/labelImg/archive/master.zip)
+
+- Pertemuan 4 (Intro to Yolo Object Detection, Train Yolo using Darknet Framework with Custom Dataset, & Deploy model to Jetson Nano)
+    - [download materi (zip)](https://github.com/Muhammad-Yunus/Jetson-Nano-Object-Detection-Learn/raw/main/pertemuan_4/pertemuan_4.zip)
+    - [download ObjectDetection-Yolo repo (zip)](https://github.com/Muhammad-Yunus/ObjectDetection-Yolo/archive/main.zip)
+    - [download labelImg (zip)](https://github.com/tzutalin/labelImg/archive/master.zip)
