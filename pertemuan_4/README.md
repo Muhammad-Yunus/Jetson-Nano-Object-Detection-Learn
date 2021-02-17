@@ -55,7 +55,8 @@ ___
 - YOLOv3 was introduced in April 2018 by `Joseph Redmon` et al.
 - YOLOv3 uses `Darknet 53 architecture` as a backbone with `53 convolutional layers`.
 ![](resource/darknet53.png)
-- `Darknet 53 architecture` is a `hybrid approach` between the network used in YOLOv2 (`Darknet-19`) and that newfangled `residual network`.
+- `Darknet 53 architecture` is a `hybrid approach` between the network used in YOLOv2 (`Darknet-19`) and `residual network (ResNet)`.
+- `Darknet 53` built with `consecutive` 3x3 and 1x1 convolution layers followed by a `skip connection` (introduced by `ResNet` to help the `activations propagate` through deeper layers without `gradient diminishing`).
 ![](resource/yolo-v3-gen-architecture.png)
 - YOLOv3 predicts boxes at `3 different scales`. 
 - Extracts features from those scales using a similar concept to `Feature Pyramid Networks (FPN)`.
