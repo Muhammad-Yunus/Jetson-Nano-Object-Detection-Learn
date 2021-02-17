@@ -38,7 +38,7 @@ class Utils():
                     font_size=0.4, color=(255,127,0), text_color=(255,255,255), 
                     confThreshold = 0.4, nmsThreshold = 0.3):
 
-        cols, rows = frame.shape[:2]
+        rows, cols = frame.shape[:2]
 
         classIds = []
         confidences = []

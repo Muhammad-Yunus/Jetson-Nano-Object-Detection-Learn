@@ -54,8 +54,7 @@ class FRCNN():
 
     def detect_object(self, frame):
         self.frame = frame
-        # self.target_w = frame.shape[1]
-        # self.target_h = frame.shape[0]
+
         if self.output != [] :
             return utils.postprocess(self.output, frame, classes, font_size=0.8)
         else :
@@ -67,7 +66,9 @@ def gen_frames():
         if not success:
             break
         else:
-            frame = frame[:, 80:-80]
+            #frame = frame[:, 80:-80]
+            frame=cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+
             frame  = frcnn.detect_object(frame)
             ret, buffer = cv2.imencode('.jpg', frame)
             frame = buffer.tobytes()
