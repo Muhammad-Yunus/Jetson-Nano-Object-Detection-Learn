@@ -29,7 +29,7 @@ ___
     - `Localization` : correct class, 0.1 < IOU < 0.5
     - `Similar` : class is similar, IOU > 0.1
     - `Other` : class is wrong, IOU > 0.1
-    - `Background` : IOU < 0.1 for any object
+    - `Background` : IOU < 0.1 for any object <br>
     ![](resource/error.png)
 - Pros: 
     - Quite `fast` (`~40 FPS` on Nvidia Titan Black)
@@ -37,13 +37,13 @@ ___
     - `Low Error Rate` for Foreground/ Background misclassification
     - Learn very `general representation` of objects
 - Cons: 
-    - `Less accurate` than Fast R-CNN (63.9% mAP compare to 66.9%)
+    - `Less accurate` than Fast R-CNN (63.9% mAP compare to 66.9%) <br>
     ![](resource/map.png)
     - Can not detect `small objects` 
     - `Low detection rate` of objects that located `close` to each other
 ## 1.2 YOLOv2 (YOLO9000)
 - YOLOv2 or `YOLO9000` was introduced at the end of 2016 by `Joseph Redmon` et al.
-- YOLOv2 uses `Darknet 19 architecture` as a backbone with `19 convolutional layers` and `5 max pooling layers` and `a softmax layer` for classification objects. 
+- YOLOv2 uses `Darknet 19 architecture` as a backbone with `19 convolutional layers` and `5 max pooling layers` and `a softmax layer` for classification objects. <br>
 ![](resource/darknet19.png)
 - Inference Speed on Pascal VOC 2007 :
     - At 67 FPS, gets 76.8 mAP 
@@ -55,7 +55,8 @@ ___
 - YOLOv3 was introduced in April 2018 by `Joseph Redmon` et al.
 - YOLOv3 uses `Darknet 53 architecture` as a backbone with `53 convolutional layers`.
 ![](resource/darknet53.png)
-- `Darknet 53 architecture` is a `hybrid approach` between the network used in YOLOv2 (`Darknet-19`) and that newfangled `residual network`.
+- `Darknet 53 architecture` is a `hybrid approach` between the network used in YOLOv2 (`Darknet-19`) and `residual network (ResNet)`.
+- `Darknet 53` built with `consecutive` 3x3 and 1x1 convolution layers followed by a `skip connection` (introduced by `ResNet` to help the `activations propagate` through deeper layers without `gradient diminishing`).
 ![](resource/yolo-v3-gen-architecture.png)
 - YOLOv3 predicts boxes at `3 different scales`. 
 - Extracts features from those scales using a similar concept to `Feature Pyramid Networks (FPN)`.

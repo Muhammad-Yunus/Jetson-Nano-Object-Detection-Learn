@@ -1,0 +1,31 @@
+<html>
+    <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8  offset-lg-2">
+                <h3 class="mt-5">Live Streaming</h3>
+                <div id="counter"></div>
+                <img src="{{ url_for('video_feed') }}" width="480">
+                <div id="inference"></div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
+<script>
+    var socket = io();
+
+    socket.on('counter_event', function(msg) {
+        jsonString = ""
+        for(var key in msg){
+            jsonString += "<b>" + key + "</b> : "+msg[key]+ ' | ';
+        }
+        $("#counter").html(jsonString);
+    });
+
+    socket.on('inference_event', function(msg) {
+        $("#inference").html(msg);
+    });
+</script>

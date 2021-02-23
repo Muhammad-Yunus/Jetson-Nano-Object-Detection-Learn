@@ -57,7 +57,7 @@ class FRCNN():
         if self.output != [] :
             return utils.postprocess(self.output, frame, classes, font_size=0.8)
         else :
-            frame
+            return frame
 
 def gen_frames():  
     while True:
