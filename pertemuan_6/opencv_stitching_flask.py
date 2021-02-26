@@ -1,5 +1,6 @@
 from flask import Flask, render_template, Response
 import numpy as np
+import datetime
 import cv2
 
 from gst_cam import camera
@@ -16,6 +17,7 @@ cap_1 = cv2.VideoCapture(camera(1, w, h))
 
 def gen_frames():  
     while True:
+        
         ret_0, frame_0 = cap_0.read()
         if not ret_0:
             break
@@ -24,7 +26,11 @@ def gen_frames():
             break
 
         try :
+            a = datetime.datetime.now()
             status, frame = stitcher.stitch([frame_0, frame_1])
+            b = datetime.datetime.now()
+            c = b - a
+            print("Stiching time : %.2f s" % (c.microseconds/1000000))
             if status != cv2.Stitcher_OK:
                 print("Can't stitch images, error code = %d" % status)
                 frame = np.hstack((frame_0, frame_1))

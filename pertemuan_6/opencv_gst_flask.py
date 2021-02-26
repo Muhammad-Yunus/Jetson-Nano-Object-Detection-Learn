@@ -6,8 +6,8 @@ from gst_cam import camera
 
 app = Flask(__name__)
 
-w, h = 480, 360
-cap_0 = cv2.VideoCapture(camera(0, w, h))
+w, h = 480, 320
+cap_0 = cv2.VideoCapture(camera(1, w, h))
 
 def gen_frames():  
     while True:
