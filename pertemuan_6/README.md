@@ -83,7 +83,7 @@ ___
     - `'video/x-raw(memory:NVMM), width=3280, height=2464, format=NV12, framerate=30/1'` is manipulation element called **CAPS** (capabillity) contain video raw, size, format, framerate and other related video properties.
     - `nvvidconv flip-method=2` is manipulation element to change format and size video stream to `'video/x-raw,format=BGRx'` and flip video output vertically `flip-method=2`.
     - `nveglglessink` is a sink element. 
-- Video result,
+- Video result,<br>
     ![](resource/gst-vid.gif)
 - If Gstreamer error when running command above, try to restart Argus API,
     ```
@@ -104,7 +104,7 @@ ___
         ```
         python3 opencv_gst_flask_2cam.py
         ```
-    - Video result,
+    - Video result,<br>
     ![](resource/gst-2cam.gif)
 ___
 # 3. OpenCV Image Stitcing
@@ -134,7 +134,7 @@ ___
     ```
     python3 opencv_stitching_flask.py
     ```
-- Video result,
+- Video result, <br>
     ![](resource/stitching.gif)
 - Modifying output stitching to remove black spot in stiched image.
     ![](resource/crop-stitch.png)
@@ -147,7 +147,7 @@ ___
     ```
     python3 opencv_stitching_flask_v2.py
     ```
-- Video result,
+- Video result, <br>
     ![](resource/stitching-v2.gif)
 - Run `opencv_dnn_stitching_flask_async.py` to test SSD mobilenet object detection inferencing using stiched image,
     ```
