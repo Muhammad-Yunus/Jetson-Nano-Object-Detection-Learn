@@ -6,13 +6,13 @@ import json
 import numpy as np
 
 from utils import Utils
+from gst_cam import camera
+from stitching_utils import crop_border
 
 utils = Utils()
 
 # load label map
-classesFile = "coco-frcnn.json"
-# "coco-frcnn.json"
-# "coco-ssd.json"
+classesFile = "model/coco-ssd.json"
 with open(classesFile) as json_labels:
     classes = json.load(json_labels)
 
@@ -24,13 +24,8 @@ for key in classes :
                        np.random.randint(0,255))
 
 # load petrained model (.pb & .pbtxt)
-MODEL_NAME = "faster_rcnn_resnet50_coco_2018_01_28"
-# "faster_rcnn_inception_v2_coco_2018_01_28"
-# "faster_rcnn_resnet50_coco_2018_01_28"
-# "ssd_mobilenet_v2_coco_2018_03_29"
-
-net = cv2.dnn.readNetFromTensorflow("tf_models/%s/frozen_inference_graph.pb" % MODEL_NAME,
-                                    "graph_text/%s.pbtxt" % MODEL_NAME)
+net = cv2.dnn.readNetFromTensorflow("model/frozen_inference_graph.pb",
+                                    "model/ssd_mobilenet_v2_coco_2018_03_29.pbtxt")
 
 # set CUDA as backend & target OpenCV DNN
 net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
@@ -43,9 +38,14 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'qwerty123'
 socketio = SocketIO(app)
 
-camera = cv2.VideoCapture(2)
+StitcObj = cv2.Stitcher(try_use_gpu=True)
+stitcher = StitcObj.create(cv2.Stitcher_PANORAMA)
 
-class FRCNN():
+w, h = 480, 320
+cap_0 = cv2.VideoCapture(camera(0, w, h))
+cap_1 = cv2.VideoCapture(camera(1, w, h))
+
+class SSD():
     def __init__(self):
         self.output = []
         self.frame = []
@@ -76,24 +76,35 @@ class FRCNN():
 
 def gen_frames():  
     while True:
-        success, frame = camera.read()
-        if not success:
+        ret_0, frame_0 = cap_0.read()
+        if not ret_0:
             break
-        else:
-            frame = frame[:, 80:-80]
-            #frame=cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+        ret_1, frame_1 = cap_1.read()
+        if not ret_1:
+            break
 
-            frame  = frcnn.detect_object(frame)
-            ret, buffer = cv2.imencode('.jpg', frame)
-            if frame is None :
-                continue
-            frame = buffer.tobytes()
-            yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+        try :
+            status, frame = stitcher.stitch([frame_0, frame_1])
+            if status != cv2.Stitcher_OK:
+                print("Can't stitch images, error code = %d" % status)
+                frame = np.hstack((frame_0, frame_1))
+            else :
+                frame = crop_border(frame)
+        except Exception as e:
+            print(e)
+            continue
+
+        frame  = ssd.detect_object(frame)
+        ret, buffer = cv2.imencode('.jpg', frame)
+        if frame is None :
+            continue
+        frame = buffer.tobytes()
+        yield (b'--frame\r\n'
+                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', w=2*w)
 
 @app.route('/video_feed')
 def video_feed():
@@ -102,7 +113,7 @@ def video_feed():
 
 
 if __name__ == '__main__':
-    global frcnn 
-    frcnn = FRCNN()
-    socketio.start_background_task(target=frcnn.main)
+    global ssd 
+    ssd = SSD()
+    socketio.start_background_task(target=ssd.main)
     app.run(host="0.0.0.0")

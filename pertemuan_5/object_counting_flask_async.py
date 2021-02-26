@@ -15,7 +15,7 @@ classesFile = "coco-frcnn.json"
 with open(classesFile) as json_labels:
     classes = json.load(json_labels)
 
-counter = Counter(classes, mode='line')
+counter = Counter(classes, mode='line', threshDist = 50)
 
 # generate random color
 color_maps = {}

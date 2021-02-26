@@ -14,7 +14,7 @@ ___
 - Run Inference Model :
     - Object Locatization (Faster R-CNN, SSD) :
     ```
-    python3 fater_rcnn_flask_async.py
+    python3 faster_rcnn_flask_async.py
     ```
     - Object Segmentation (Mask R-CNN):
     ```

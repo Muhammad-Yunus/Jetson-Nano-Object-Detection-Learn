@@ -1,0 +1,41 @@
+<html>
+    <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8  offset-lg-2">
+                <h3 class="mt-5">Live Streaming</h3>
+                <div id="counter"></div>
+                <img src="{{ url_for('video_feed') }}" width="{{w}}">
+                <div id="inference"></div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
+<script>
+    var socket = io();
+
+    socket.on('counter_event', function(msg) {
+        var counter_data = [];
+        for(var key in msg){
+            var tempString = ''
+            if (typeof counter_data[msg[key][1]] !== 'undefined'){
+                var tempString = counter_data[msg[key][1]]
+            }
+            tempString += "<b>" + key + "</b> : "+msg[key][0]+ ' | ';
+            counter_data[msg[key][1]] = tempString;
+        }
+        var GlobalCounterSting = ''
+        for( var i = 0; i < counter_data.length; i++){
+            counterSting = counter_data[i]
+            GlobalCounterSting += "line " + i + " " + counterSting + "<br>"
+        }
+        $("#counter").html(GlobalCounterSting);
+    });
+
+    socket.on('inference_event', function(msg) {
+        $("#inference").html(msg);
+    });
+</script>
