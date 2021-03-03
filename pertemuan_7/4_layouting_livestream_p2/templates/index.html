@@ -1,0 +1,63 @@
+{% extends "_layout.html" %}
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+        <div class="container mb-1">
+            <h1><i>Real-time Object Counter</i></h1>
+        </div>
+        <div class="container mb-2 row">
+            <div class="col-md-6">
+                {% if setting.stream_on %}
+                <div id="counter"></div>
+                <img src="/video_feed" width={{setting.w}}>
+                <div id="inference"></div>
+                {% else %}
+                <img src="/static/img/no_video.png" width={{setting.w}}>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                {% if setting.stream_on %}
+                <a href="/?camera=off" class="btn btn-secondary" role="button">Turn Off Camera</a>
+                {% else %}
+                <a href="/?camera=on" class="btn btn-danger" role="button">Turn On Camera</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    var socket = io();
+
+    socket.on('counter_event', function(payload) {
+        var messages = payload['messages'];
+        var counter_data = [];
+        var printed_str = '';
+        for(var i = 0; i < messages.length; i++){
+            var msg = messages[i];
+            var counter_perline = '';
+            
+            for(var key in msg){
+                counter_perline += "<b>" + key + "</b> "+msg[key]+ ' | ';
+            }
+            counter_data.push(counter_perline)
+        }
+        if (payload['type'] === 'area'){
+            printed_str = counter_data[0];
+        }
+        else {
+            for(var i = 0; i < counter_data.length; i++){
+                printed_str += "line " + i + " : " + counter_data[i] + "<br>";
+            }
+        }
+
+        
+        $("#counter").html(printed_str);
+    });
+    socket.on('inference_event', function(msg) {
+        $("#inference").html(msg);
+    });    
+</script>
+{% endblock %}

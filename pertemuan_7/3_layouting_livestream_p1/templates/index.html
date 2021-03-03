@@ -1,0 +1,26 @@
+{% extends "_layout.html" %}
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+        <div class="container mb-1">
+            <h1><i>Real-time Object Counter</i></h1>
+        </div>
+        <div class="container mb-2 row">
+            <div class="col-md-6">
+                {% if setting.stream_on %}
+                <img src="/video_feed" width={{setting.w}}>
+                {% else %}
+                <img src="/static/img/no_video.png" width={{setting.w}}>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                {% if setting.stream_on %}
+                <a href="/?camera=off" class="btn btn-secondary" role="button">Turn Off Camera</a>
+                {% else %}
+                <a href="/?camera=on" class="btn btn-danger" role="button">Turn On Camera</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,157 @@
+{% extends "_layout.html" %}
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+        <div class="container mb-2 row">
+            <div class="col-md-6">
+                <h2><i>Real-time Object Counter</i></h2>
+                {% if setting.stream_on %}
+                <div id="counter"></div>
+                <img src="/video_feed" width={{setting.w}}>
+                {% else %}
+                <img src="/static/img/no_video.png" width={{setting.w}}>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <div id="main_card" class="row">
+                    <!-- BUTTON CONTROL -->
+                    <div class="col-md-12 mb-2">
+                        <select id="modes" class="custom-select mode-select">
+                            <option value="" {% if setting.selected_mode is none %} selected="selected" {% endif %}>-mode-</option>
+                            {% for item in setting.mode %}
+                             <option value="{{item}}" {% if setting.selected_mode == item %} selected="selected" {% endif %}>{{item}}</option>
+                            {% endfor %}
+                        </select>
+        
+                        {% if setting.stream_on %}
+                        <a id="cam-btn" href="/?camera=off&mode=" class="btn btn-secondary" role="button" >Turn Off Camera</a>
+                        {% else %}
+                        <a id="cam-btn" href="/?camera=on&mode=" class="btn btn-primary" role="button" >Turn On Camera</a>
+                        {% endif %}
+        
+                        <button type="button" id="rst-btn" href="" class="btn btn-success" role="button" >Reset Counter</a>
+                    </div>
+
+                    <!-- CARD TIME & FPS -->
+                    <div class="col-md-6 mb-2">
+                        <div class="card border-success text-center">
+                            <h6 class="card-header">
+                              Time
+                            </h6>
+                            <div class="card-body text-success">
+                                <h4 id="time_card" class="card-text">00:00:00</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <div class="card border-success text-center">
+                            <h6 class="card-header">
+                              FPS
+                            </h6>
+                            <div class="card-body text-success">
+                                <h4 id="inference" class="card-text">0</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    var card_template = 
+        '<div class="col-md-3 mb-2 counter_card"> ' +
+            '<div class="card border-success text-center"> ' +
+                '<div class="card-header">' +
+                    '<h6>&&</h6> ' +
+                '</div>' +
+                '<div class="card-body text-success"> ' +
+                    '<h4 id="inference" class="card-text">%%</h4> ' +
+                '</div> ' +
+            '</div> ' +
+        '</div> ';
+
+    var spacing_template = 
+        '<div class="col-md-12 counter_card">' +
+            '<hr>' +
+            '<h5>&&</h5>' +
+        '</div>'
+    var socket = io();
+
+    socket.on('counter_event', function(payload) {
+        var messages = payload['messages'];
+        var counter_data = [];
+        var printed_html = '';
+        for(var i = 0; i < messages.length; i++){
+            var msg = messages[i];
+            var counter_perline = '';
+            
+            for(var key in msg){
+                counter_perline += card_template.replace("&&", key)
+                                                .replace("%%", msg[key])
+            }
+            counter_data.push(counter_perline)
+        }
+
+        for(var i = 0; i < counter_data.length; i++){
+            printed_html += spacing_template.replace("&&", "line " + i) + counter_data[i];
+        }
+
+        $('.counter_card').remove();
+        $("#main_card").append(printed_html);
+    });
+    socket.on('inference_event', function(msg) {
+        $("#inference").text(msg);
+    });    
+</script>
+<script>
+    
+    function button_mode(mode){
+        if (mode && mode !== "None" && mode !== "-mode-"){
+            $('#cam-btn').prop('aria-disabled', "false");
+            $('#cam-btn').removeClass('disabled');
+            $('#rst-btn').removeProp('disabled');
+            
+            var href = $("#cam-btn").attr("href");
+            if ((href.match(/=/g) || []).length > 1){
+                href = href.substr(0, (href.lastIndexOf("=") + 1));
+            }
+            $("#cam-btn").attr("href", href + mode);
+        }
+        else {
+            $('#cam-btn').prop('aria-disabled', "true");
+            $('#cam-btn').addClass('disabled');
+            $('#rst-btn').prop('disabled', 'disabled');
+        }
+    }
+
+    $(document).ready(function() {
+        var default_mode = '{{setting.selected_mode}}';
+        button_mode(default_mode);
+    });
+
+    $('#modes').on('change', function (e) {
+        var mode = $('#modes').find(":selected").text();
+        button_mode(mode);
+    });
+
+    $('#rst-btn').on('click', function (e) {
+        socket.emit('reset_counter', {data: 'reset'});
+    });
+</script>
+<script>
+    function time() {
+        var d = new Date();
+        var s = d.getSeconds();
+        var m = d.getMinutes();
+        var h = d.getHours();
+        $("#time_card").text(("0" + h).substr(-2) + ":" + ("0" + m).substr(-2) + ":" + ("0" + s).substr(-2));
+    }
+    setInterval(time, 1000);
+</script>
+
+
+{% endblock %}

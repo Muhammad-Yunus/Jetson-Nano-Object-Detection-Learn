@@ -1,0 +1,45 @@
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: rgba(255,255,255,.8);
+}
+
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .navbar-text:hover {
+    color: #ffffff;
+}
+/* change the link color */
+.navbar-custom .nav .nav-item .nav-link {
+    color: rgba(255,255,255,.8);
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+
+.navbar-custom .nav-item.active .nav-link {
+    color: #ffffff;
+}
+
+.alert-fixed {
+    position:fixed; 
+    top:10vh;
+    z-index:9999; 
+    transform: translate(45vw);
+}
+.jumbotron {
+    padding: 2rem 2rem;
+}
+.mode-select{
+    width: 150px;
+}
+hr {
+    margin-top: 5px !important;
+    margin-bottom: 1px !important;
+}
+.card-header {
+    padding: .25rem 1.25rem !important;
+}
+.card-body {
+    padding: 0.5rem !important;
+}
