@@ -46,7 +46,7 @@ ___
 # 4. Layouting - Livestream (part 2)
 - Add control button
 - Project directory :
-    - `3_layouting_livestream/`
+    - `4_layouting_livestream_p2/`
 - Run application :
     ```
     python3 4_layouting_livestream_p2/app.py
@@ -55,7 +55,7 @@ ___
 # 5. Layouting - Livestream (part 4)
 - Add Card output
 - Project directory :
-    - `3_layouting_livestream/`
+    - `5_layouting_livestream_p3/`
 - Run application :
     ```
     python3 5_layouting_livestream_p3/app.py
