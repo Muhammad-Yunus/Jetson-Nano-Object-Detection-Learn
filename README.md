@@ -24,3 +24,6 @@ Resource Belajar Deep Learning Object Detection di Jetson Nano
 
 - Pertemuan 6 (Jetson Nano Camera Architecture, GStreamer, Image Stitching and OpenCV DNN Inferencing from Stitched Image)
     - [download materi (zip)](https://github.com/Muhammad-Yunus/Jetson-Nano-Object-Detection-Learn/raw/main/pertemuan_6/pertemuan_6.zip)
+
+- Pertemuan 7 (Flask + Bootstrap + SocketIO + OpenCV DNN for Realtime Object Counting Web Application)
+    - [download materi (zip)](https://github.com/Muhammad-Yunus/Jetson-Nano-Object-Detection-Learn/raw/main/pertemuan_7/pertemuan_7.zip)
