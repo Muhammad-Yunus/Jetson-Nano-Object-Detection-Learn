@@ -1,7 +1,7 @@
 ___
 # Pertemuan 7
 
-- Object Counting Crossing Area
+- Object Counting Crossing Multiline
 - Base Layout Bootstrap
 - Layouting - Livestream 
     - start & stop stream
@@ -9,7 +9,7 @@ ___
     - change counter mode
 - Run flask app as Systemd service
 ___
-# 1. Object Counting Crossing Area
+# 1. Object Counting Crossing Multiline
 - New mode, `multiline`
 - Abble to append multiple line as counter crossing.
 - just define `counter = Counter(classes, mode='multiline', lines=lines)`,
@@ -21,7 +21,7 @@ ___
 ___
 # 2. Base Layout Bootstrap
 - Wireframe UI
-    - Home screen :
+    - Home screen :<br>
     ![](resource/home.png)
 - Project directory :
     - `2_base_layout/`
