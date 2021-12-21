@@ -40,7 +40,7 @@ for key in classes :
                        np.random.randint(0,255), 
                        np.random.randint(0,255))
 
-class FRCNN():
+class YoloInference():
     def __init__(self):
         self.output = []
         self.frame = []
@@ -106,6 +106,6 @@ def video_feed():
 
 if __name__ == '__main__':
     global frcnn 
-    frcnn = FRCNN()
+    frcnn = YoloInference()
     socketio.start_background_task(target=frcnn.main)
     socketio.run(app, host="0.0.0.0")
