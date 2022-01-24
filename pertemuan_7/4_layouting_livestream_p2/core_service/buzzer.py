@@ -10,7 +10,6 @@ class Buzzer():
         self.GPIO.setwarnings(False)
         self.GPIO.setup(output_pin, self.GPIO.OUT, initial=self.GPIO.LOW)
 
-
     def main(self):
         while True :
             if self.is_running :
@@ -21,5 +20,6 @@ class Buzzer():
                     self.GPIO.output(self.output_pin, self.GPIO.LOW)
                     time.sleep(0.02)   
                 self.is_running = False
+                
     def cleanup():
         self.GPIO.cleanup()

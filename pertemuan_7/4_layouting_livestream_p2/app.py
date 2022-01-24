@@ -70,7 +70,6 @@ if __name__ == '__main__':
     detector.load_model(model="model/frozen_inference_graph.pb",
                         config="model/ssd_mobilenet_v2_coco_2018_03_29.pbtxt")
 
-
     # initialize stream object
     stream = Stream(camera(0, w, h), detector, counter, buzz, socketio, classes)
 

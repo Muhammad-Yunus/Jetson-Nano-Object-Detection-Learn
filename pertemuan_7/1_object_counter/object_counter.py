@@ -5,7 +5,7 @@ from utils import Utils
 utils = Utils()
 
 class Counter():
-    def __init__(self, classes, mode='area', lines=[], threshDist = 50, direction=('left', 'right')):
+    def __init__(self, classes, mode='area', lines=[], color_lines=[], threshDist = 50, direction=('left', 'right')):
         self.classes = classes
         self.frame_id = 0
         self.counter_objects = []
@@ -14,6 +14,7 @@ class Counter():
         self.threshDist = threshDist
         self.direction = direction
         self.set_null_counter()
+        self.color_lines = color_lines
 
     def set_null_counter(self):
         self.counter_objects = []
@@ -116,9 +117,9 @@ class Counter():
     def draw_line(self, frame):
         if self.counter_mode == 'line' :
             x1, y1, x2, y2 = self.lines[0]
-            frame = cv2.line(frame, (x1, y1), (x2, y2 ), (255, 0, 255), 3)
+            frame = cv2.line(frame, (x1, y1), (x2, y2 ), self.color_lines[0], 3)
         elif self.counter_mode == 'multiline':
-            for line in self.lines :
+            for i, line in enumerate(self.lines) :
                 x1, y1, x2, y2 = line
-                frame = cv2.line(frame, (x1, y1), (x2, y2 ), (255, 0, 255), 3)          
+                frame = cv2.line(frame, (x1, y1), (x2, y2 ), self.color_lines[i], 3)          
         return frame

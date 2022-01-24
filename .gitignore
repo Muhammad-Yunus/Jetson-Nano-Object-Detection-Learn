@@ -4,5 +4,8 @@ pertemuan_2/model/saved_model/saved_model.pb
 *.pb
 *.pbtxt
 *.weight
+*.weights
 *.conv.*
 *.pyc
+*.onnx
+*.trt

@@ -13,7 +13,7 @@ ___
 - New mode, `multiline`
 - Abble to append multiple line as counter crossing.
 - just define `counter = Counter(classes, mode='multiline', lines=lines)`,
-- and add multiple lien using `lines.append()` before creating `counter` object,
+- and add multiple line using `lines.append()` before creating `counter` object,
 - Run `1_object_counter/object_counting_flask_async.py`,
     ```
     python3 1_object_counter/object_counting_flask_async.py
@@ -87,7 +87,6 @@ WantedBy=multi-user.target
 ```
 - Change `User=<jetson nano user>` to your jetson nano user.
 - Change `WorkingDirectory=<directory location of app.py>` to directory location,
-- Close and save using CTRL + X followed by CTRL + Y
 - Run bellow command to activate service,
 ```
 sudo systemctl daemon-reload

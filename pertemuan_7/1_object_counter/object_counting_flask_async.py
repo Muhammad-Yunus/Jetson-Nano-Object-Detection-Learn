@@ -10,7 +10,7 @@ from object_counter import Counter
 from buzzer import Buzzer
 
 # load label map
-classesFile = "model/coco-ssd.json"
+classesFile = "model/coco-frcnn.json"
 with open(classesFile) as json_labels:
     classes = json.load(json_labels)
 
@@ -22,8 +22,8 @@ for key in classes :
                        np.random.randint(0,255))
 
 # load pretrained model
-net = cv2.dnn.readNet("model/frozen_inference_graph.pb",
-                    "model/ssd_mobilenet_v2_coco_2018_03_29.pbtxt")
+net = cv2.dnn.readNet("model/frcnn_inception_v2_coco_frozen_inference_graph.pb",
+                    "model/faster_rcnn_inception_v2_coco_2018_01_28.pbtxt")
 
 # set CUDA as backend & target OpenCV DNN
 net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
@@ -46,7 +46,16 @@ cap_0 = cv2.VideoCapture(camera(0, w, h)) # if using CSI camera
 lines = []
 lines.append([int(w*0.20), 0, int(w*0.20), h]) # LINE 0, x0, y0, x1, y1
 lines.append([int(w*0.80), 0, int(w*0.80), h]) # LINE 1, x0, y0, x1, y1
-counter = Counter(classes, mode='multiline', lines=lines, threshDist = 30) #  mode='line', 'area', 'multiline'
+lines.append([int(w*0.20), int(h*0.2), int(w*0.80), int(h*0.2)]) # LINE 1, x0, y0, x1, y1
+
+# generate random color
+color_lines = []
+for i in range(len(lines)) :
+    color_lines.append((np.random.randint(0,255), 
+                       np.random.randint(0,255), 
+                       np.random.randint(0,255)))
+
+counter = Counter(classes, mode='multiline', lines=lines, color_lines=color_lines, threshDist = 30) #  mode='line', 'area', 'multiline'
 
 
 class Detector():

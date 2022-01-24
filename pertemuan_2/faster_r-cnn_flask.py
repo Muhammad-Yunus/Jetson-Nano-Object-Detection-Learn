@@ -26,6 +26,7 @@ net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
 
 # get output layers
 layerOutput = net.getUnconnectedOutLayersNames()
+print(net.getLayerNames(), layerOutput)
 
 app = Flask(__name__)
 
